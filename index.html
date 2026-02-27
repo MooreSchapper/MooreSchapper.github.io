@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时贞的小站 - 主页</title>
+    <!-- Font Awesome 6 (免费图标库，用于视觉占位) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: #2d3e50;
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 容器限制最大宽度，居中显示 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            width: 100%;
+        }
+
+        /* ----- 页头区域 (正上方题写站名) ----- */
+        .site-header {
+            padding: 32px 0 16px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .site-title {
+            font-size: 2.8rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: #2b3b4c;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.02);
+            margin-bottom: 8px;
+        }
+
+        .site-title a {
+            text-decoration: none;
+            color: inherit;
+            transition: opacity 0.2s;
+        }
+
+        .site-title a:hover {
+            opacity: 0.7;
+        }
+
+        /* ----- 导航栏 ----- */
+        .navbar {
+            margin-top: 16px;
+        }
+
+        .nav-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+            list-style: none;
+            padding: 8px 0;
+        }
+
+        .nav-list li a {
+            display: inline-block;
+            padding: 8px 20px;
+            text-decoration: none;
+            color: #3a4e62;
+            font-weight: 500;
+            font-size: 1.1rem;
+            border-radius: 40px;
+            background-color: transparent;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-list li a:hover {
+            background-color: #e9ecf3;
+            border-color: #d0d9e6;
+        }
+
+        /* 当前页面高亮 (active) */
+        .nav-list li a.active {
+            background-color: #ffffff;
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+            font-weight: 600;
+            color: #1f2b36;
+            border-bottom: 2px solid #8a9bb5;  /* 低调的强调色 */
+        }
+
+        /* ----- 主内容区 (主页设计 + 各栏目占位) ----- */
+        .main-content {
+            flex: 1;
+            padding: 48px 0 60px;
+        }
+
+        /* 主页特色卡片网格 (用于主页设计) */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 350;
+            margin-bottom: 32px;
+            color: #2f4156;
+            border-left: 6px solid #b7c4d9;
+            padding-left: 20px;
+            letter-spacing: 1px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: #ffffffdd;
+            backdrop-filter: blur(2px);
+            background-color: #ffffff;
+            border-radius: 28px;
+            padding: 30px 24px 24px;
+            box-shadow: 0 15px 30px -12px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #f0f3f7;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 40px -14px rgba(0,0,0,0.15);
+            border-color: #dbe1ec;
+        }
+
+        .card i {
+            color: #5f7392;
+            margin-bottom: 16px;
+            background: #edf2f9;
+            padding: 18px;
+            border-radius: 60px;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card h3 {
+            font-size: 1.6rem;
+            font-weight: 420;
+            margin-bottom: 12px;
+            color: #2c3f53;
+        }
+
+        .card p {
+            color: #5b6f83;
+            margin-bottom: 24px;
+            font-size: 1rem;
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        /* 占位按钮/标签样式 (主页用按钮跳转，栏目页用徽章) */
+        .btn {
+            display: inline-block;
+            background-color: #eef3fa;
+            color: #2f4562;
+            padding: 10px 26px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            border: 1px solid #cbd7e6;
+            transition: background 0.2s, border 0.2s;
+            font-size: 0.95rem;
+            margin-top: 8px;
+        }
+
+        .btn:hover {
+            background-color: #e0e8f2;
+            border-color: #9bb0c9;
+        }
+
+        /* 占位徽章 (用于栏目页卡片) */
+        .badge {
+            background-color: #e9eef4;
+            color: #526b7f;
+            font-size: 0.85rem;
+            padding: 6px 16px;
+            border-radius: 40px;
+            display: inline-block;
+            border: 1px dashed #a5b9ce;
+            letter-spacing: 0.3px;
+        }
+
+        /* 栏目页面占位卡片 (无按钮，有徽章) */
+        .card .badge {
+            margin-top: 12px;
+        }
+
+        /* 占位列表样式 (用于栏目页副内容) */
+        .placeholder-list {
+            margin-top: 40px;
+            background: #ffffffb3;
+            border-radius: 40px;
+            padding: 32px;
+            border: 1px solid #e2eaf2;
+        }
+
+        .placeholder-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 16px 0;
+            border-bottom: 1px dashed #d7e0e9;
+        }
+        .placeholder-item:last-child {
+            border-bottom: none;
+        }
+        .placeholder-item i {
+            width: 36px;
+            color: #7b8fa8;
+            font-size: 1.4rem;
+        }
+        .placeholder-text {
+            flex: 1;
+        }
+        .placeholder-text .title {
+            height: 20px;
+            background: linear-gradient(90deg, #d3deed 25%, #e7eef9 50%, #d3deed 75%);
+            background-size: 200% 100%;
+            animation: loading 1.8s infinite;
+            width: 60%;
+            border-radius: 40px;
+            margin-bottom: 10px;
+        }
+        .placeholder-text .meta {
+            height: 14px;
+            background-color: #e0e8f0;
+            width: 35%;
+            border-radius: 20px;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* 页脚 */
+        .site-footer {
+            text-align: center;
+            padding: 30px 0 20px;
+            font-size: 0.9rem;
+            color: #7e8d9e;
+            border-top: 1px solid #e2e8f0;
+            background-color: #fafcff;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 600px) {
+            .site-title { font-size: 2.2rem; }
+            .nav-list li a { padding: 6px 16px; font-size: 1rem; }
+            .card-grid { gap: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1 class="site-title"><a href="index.html">时贞的小站</a></h1>
+            <nav class="navbar">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="active">主页</a></li>
+                    <li><a href="novalat.html">Novalat语言</a></li>
+                    <li><a href="daily.html">日常频道</a></li>
+                    <li><a href="computer.html">计算机频道</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- 主页设计：欢迎语 + 卡片栏目预览 (无实际文章) -->
+            <h2 class="section-title">探索分类</h2>
+            <div class="card-grid">
+                <!-- 卡片 Novalat 语言 -->
+                <div class="card">
+                    <i class="fas fa-language fa-3x"></i>
+                    <h3>Novalat语言</h3>
+                    <p>人造语言 · 词汇 · 语法 · 世界设定</p>
+                    <!-- 占位按钮：可跳转至对应栏目页（实际导航） -->
+                    <a href="novalat.html" class="btn">进入栏目</a>
+                </div>
+                <!-- 卡片 日常频道 -->
+                <div class="card">
+                    <i class="fas fa-sun fa-3x"></i>
+                    <h3>日常频道</h3>
+                    <p>生活记录 · 随想 · 影像 · 杂谈</p>
+                    <a href="daily.html" class="btn">进入栏目</a>
+                </div>
+                <!-- 卡片 计算机频道 -->
+                <div class="card">
+                    <i class="fas fa-laptop-code fa-3x"></i>
+                    <h3>计算机频道</h3>
+                    <p>编程 · 折腾 · 工具 · 软硬件</p>
+                    <a href="computer.html" class="btn">进入栏目</a>
+                </div>
+            </div>
+
+            <!-- 主页下方再加一片占位区域，示意“最近动态”但不填充内容 -->
+            <div style="margin-top: 70px;">
+                <h2 class="section-title" style="border-left-color: #d9c8b2;">近期动向</h2>
+                <div class="placeholder-list">
+                    <div class="placeholder-item">
+                        <i class="fas fa-circle-notch"></i>
+                        <div class="placeholder-text">
+                            <div class="title"></div>
+                            <div class="meta"></div>
+                        </div>
+                    </div>
+                    <div class="placeholder-item">
+                        <i class="fas fa-circle-notch"></i>
+                        <div class="placeholder-text">
+                            <div class="title" style="width: 45%;"></div>
+                            <div class="meta" style="width: 25%;"></div>
+                        </div>
+                    </div>
+                    <div class="placeholder-item">
+                        <i class="fas fa-circle-notch"></i>
+                        <div class="placeholder-text">
+                            <div class="title" style="width: 75%;"></div>
+                            <div class="meta" style="width: 40%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 说明文字：占位示意，无实际内容 -->
+                <p style="text-align: center; color: #a1b2c6; margin-top: 16px; font-style: italic;">✨ 这里留给你以后填写真正的文章 ✨</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2025 时贞的小站 · 由 GitHub Pages 搭建 · 设计占位框架</p>
+        </div>
+    </footer>
+</body>
+</html>
