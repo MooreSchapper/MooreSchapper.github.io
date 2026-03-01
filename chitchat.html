@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>时贞的小站 · 杂谈频道</title>
+  <style>
+    /* 沿用相同风格，并增加文章列表布局 */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body {
+      background: #f1f4f8;
+      background-image: radial-gradient(circle at 10% 20%, rgba(220,230,245,0.4) 0%, transparent 30%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1.5rem;
+    }
+    .site-wrapper {
+      max-width: 1100px;
+      width: 100%;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 2.5rem;
+      box-shadow: 0 25px 45px -12px rgba(0,10,30,0.25);
+      padding: 2rem;
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+    .site-header {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+    .site-header h1 {
+      font-size: 3.2rem;
+      font-weight: 400;
+      letter-spacing: 6px;
+      color: #2c3e50;
+      text-shadow: 2px 2px 0 rgba(255,255,255,0.8);
+      font-family: 'Times New Roman', serif;
+      border-bottom: 1px dashed #b3c4d4;
+      padding-bottom: 0.8rem;
+    }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      padding: 0.4rem 1.2rem;
+      background: rgba(255,255,255,0.5);
+      border-radius: 40px;
+      color: #2a405c;
+      text-decoration: none;
+      border: 1px solid rgba(120,150,180,0.3);
+    }
+    .back-link:hover { background: white; }
+
+    /* 两列布局：文章列表 + 内容区 */
+    .chitchat-layout {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    .article-list {
+      flex: 1;
+      max-width: 260px;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(4px);
+      border-radius: 32px;
+      padding: 1.5rem 1rem;
+      border: 1px solid rgba(255,255,255,0.8);
+    }
+    .article-list h3 {
+      font-weight: 450;
+      color: #1e3a5a;
+      margin-bottom: 1rem;
+      padding-left: 0.5rem;
+      border-left: 4px solid #8faec9;
+    }
+    .article-list ul {
+      list-style: none;
+    }
+    .article-list li {
+      margin-bottom: 0.6rem;
+    }
+    .article-list a {
+      display: block;
+      padding: 0.6rem 1rem;
+      background: rgba(255,255,255,0.3);
+      border-radius: 30px;
+      color: #1e3a5a;
+      text-decoration: none;
+      transition: 0.15s;
+      border: 1px solid transparent;
+    }
+    .article-list a:hover {
+      background: white;
+      border-color: #b0c8dd;
+    }
+    .article-list a.active-article {
+      background: white;
+      border-color: #8faec9;
+      font-weight: 550;
+    }
+
+    .article-content {
+      flex: 3;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(4px);
+      border-radius: 32px;
+      padding: 2rem;
+      border: 1px solid rgba(255,255,255,0.8);
+      min-height: 400px;
+    }
+    .markdown-body { /* 复用之前样式 */ }
+    .markdown-body h1, .markdown-body h2 { border-bottom: 1px dotted #cad6e3; }
+    .loading-placeholder { color: #6f8a9f; font-style: italic; padding: 2rem; text-align: center; }
+    .foot-note { margin-top: 2rem; text-align: center; color: #99aebb; }
+
+    @media (max-width: 700px) {
+      .chitchat-layout { flex-direction: column; }
+      .article-list { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+<div class="site-wrapper">
+  <header class="site-header">
+    <h1>时贞的小站 · 杂谈</h1>
+  </header>
+
+  <a href="index.html" class="back-link">← 返回主页</a>
+
+  <div class="chitchat-layout">
+    <!-- 左侧文章列表 (可手动配置) -->
+    <div class="article-list">
+      <h3>📂 文章列表</h3>
+      <ul id="article-list">
+        <!-- 动态由js生成，也可以写静态链接，但为了便于修改，我们用js从数组生成 -->
+      </ul>
+    </div>
+
+    <!-- 右侧内容展示区 -->
+    <div class="article-content" id="article-content">
+      <div class="loading-placeholder">请从左侧选择一篇文章</div>
+    </div>
+  </div>
+
+  <div class="foot-note">✎ 文章内容通过 markdown 文件管理，修改列表请编辑 chitchat.html 中的 `articles` 数组</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  (function() {
+    marked.setOptions({ breaks: true, gfm: true });
+
+    // 在此处配置你的文章列表：文件名(不包含路径) 和 显示标题
+    const articles = [
+      { file: 'essay1.md', title: '📝 第一篇文章' },
+      { file: 'essay2.md', title: '📝 第二篇随感' },
+      { file: 'essay3.md', title: '📝 关于日常的杂谈' },
+      // 你可以继续添加，例如 { file: 'new.md', title: '新文章' }
+    ];
+
+    const listEl = document.getElementById('article-list');
+    const contentEl = document.getElementById('article-content');
+    const MD_PATH = 'markdown/';
+
+    // 生成文章列表
+    function renderList() {
+      let html = '';
+      articles.forEach((article, index) => {
+        html += `<li><a href="#" data-file="${article.file}" class="article-link">${article.title}</a></li>`;
+      });
+      listEl.innerHTML = html;
+
+      // 绑定点击事件
+      document.querySelectorAll('.article-link').forEach(link => {
+        link.addEventListener('click', async (e) => {
+          e.preventDefault();
+          // 移除其他高亮
+          document.querySelectorAll('.article-link').forEach(l => l.classList.remove('active-article'));
+          link.classList.add('active-article');
+
+          const file = link.dataset.file;
+          contentEl.innerHTML = `<div class="loading-placeholder">📡 加载 ${file} ...</div>`;
+
+          try {
+            const res = await fetch(MD_PATH + file);
+            if (!res.ok) throw new Error('not found');
+            const md = await res.text();
+            contentEl.innerHTML = marked.parse(md);
+          } catch (err) {
+            contentEl.innerHTML = `<div class="loading-placeholder" style="color:#b04a4a;">⚠️ 未找到 ${file} ，请确认 markdown/${file} 存在。</div>`;
+          }
+        });
+      });
+
+      // 可选：默认选中第一篇
+      if (articles.length > 0) {
+        const firstLink = document.querySelector('.article-link');
+        if (firstLink) {
+          firstLink.click();
+        }
+      }
+    }
+
+    renderList();
+  })();
+</script>
+</body>
+</html>
