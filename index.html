@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>时贞的小站</title>
-  <!-- 简洁风格样式, 柔和基调, 圆角卡片, 适中的留白 -->
+  <title>时贞的小站 · 主页 & Novalat</title>
   <style>
+    /* ---------- 全局样式（与之前保持一致） ---------- */
     * {
       margin: 0;
       padding: 0;
@@ -24,7 +24,6 @@
       padding: 2rem 1.5rem;
     }
 
-    /* 主容器 — 优雅的居中卡片式布局 */
     .site-wrapper {
       max-width: 1000px;
       width: 100%;
@@ -38,7 +37,6 @@
       border: 1px solid rgba(255, 255, 255, 0.5);
     }
 
-    /* 页眉 — 正上方题字 */
     .site-header {
       text-align: center;
       margin-bottom: 1.8rem;
@@ -51,13 +49,11 @@
       color: #2c3e50;
       text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.8), 4px 4px 0 rgba(210, 222, 235, 0.3);
       margin-bottom: 0.5rem;
-      word-break: keep-all;
       font-family: 'Times New Roman', 'Songti SC', serif;
       border-bottom: 1px dashed #b3c4d4;
       padding-bottom: 0.8rem;
     }
 
-    /* 导航栏 — 轻盈的玻璃体 */
     .nav-bar {
       display: flex;
       justify-content: center;
@@ -99,7 +95,6 @@
       border: 1px solid rgba(120, 150, 180, 0.3);
     }
 
-    /* 视图容器 (三个页面切换) */
     .view {
       display: none;
       animation: fadeIn 0.25s ease;
@@ -114,7 +109,6 @@
       100% { opacity: 1; }
     }
 
-    /* 卡片内容区域 */
     .content-card {
       background: rgba(255, 255, 255, 0.7);
       backdrop-filter: blur(4px);
@@ -126,13 +120,7 @@
       color: #1e2e3e;
     }
 
-    /* 主页设计 (简洁大气, 引入微妙的纹理) */
-    .home-content {
-      min-height: 280px;
-      background-image: radial-gradient(circle at 80% 20%, rgba(255,255,250,0.5) 0%, transparent 35%);
-    }
-
-    /* Novalat 频道内子模块选项卡 */
+    /* Novalat 子模块选项卡 */
     .module-tabs {
       display: flex;
       gap: 1rem;
@@ -168,79 +156,20 @@
       box-shadow: 0 3px 8px rgba(80, 110, 140, 0.15);
     }
 
-    /* 内容渲染区通用样式 (针对markdown生成) */
-    .markdown-body {
-      overflow-x: auto;
-    }
-
-    .markdown-body h1,
-    .markdown-body h2,
-    .markdown-body h3 {
+    .markdown-body h1, .markdown-body h2, .markdown-body h3 {
       font-weight: 450;
       margin: 1.2rem 0 0.8rem;
       color: #1e3a5a;
       border-bottom: 1px dotted #cad6e3;
       padding-bottom: 0.3rem;
     }
+    .markdown-body p { margin: 1rem 0; line-height: 1.7; }
+    .markdown-body table { border-collapse: collapse; width: 100%; margin: 1.5rem 0; background: rgba(250,252,255,0.7); border-radius: 20px; }
+    .markdown-body th, .markdown-body td { padding: 0.75rem 1rem; border: 1px solid #cfdeed; }
+    .markdown-body th { background: #e3ecf5; }
+    .markdown-body code { background: #eef3f8; padding: 0.2rem 0.5rem; border-radius: 12px; }
+    .markdown-body pre code { display: block; padding: 1rem; background: #1e2e3e; color: #e3eef8; border-radius: 24px; }
 
-    .markdown-body h1 { font-size: 2rem; }
-    .markdown-body h2 { font-size: 1.6rem; }
-
-    .markdown-body p {
-      margin: 1rem 0;
-      line-height: 1.7;
-    }
-
-    .markdown-body table {
-      border-collapse: collapse;
-      width: 100%;
-      margin: 1.5rem 0;
-      background: rgba(250, 252, 255, 0.7);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.03);
-    }
-
-    .markdown-body th,
-    .markdown-body td {
-      padding: 0.75rem 1rem;
-      border: 1px solid #cfdeed;
-      text-align: left;
-    }
-
-    .markdown-body th {
-      background: #e3ecf5;
-      font-weight: 500;
-    }
-
-    .markdown-body tr:nth-child(even) {
-      background: rgba(240, 247, 255, 0.5);
-    }
-
-    .markdown-body code {
-      background: #eef3f8;
-      padding: 0.2rem 0.5rem;
-      border-radius: 12px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9em;
-      color: #1e4460;
-    }
-
-    .markdown-body pre code {
-      display: block;
-      padding: 1rem;
-      overflow-x: auto;
-      background: #1e2e3e;
-      color: #e3eef8;
-      border-radius: 24px;
-    }
-
-    /* 杂谈频道同样优雅简洁 */
-    #chitchat-content {
-      min-height: 200px;
-    }
-
-    /* 加载中提示 */
     .loading-placeholder {
       color: #6f8a9f;
       font-style: italic;
@@ -250,7 +179,6 @@
       border-radius: 30px;
     }
 
-    /* 底部留白 */
     .foot-note {
       margin-top: 2rem;
       font-size: 0.8rem;
@@ -258,15 +186,20 @@
       color: #99aebb;
     }
 
-    /* 响应式优化 */
-    @media (max-width: 600px) {
-      .site-wrapper { padding: 1.5rem 1rem; }
-      .site-header h1 { font-size: 2.5rem; letter-spacing: 3px; }
-      .nav-bar { gap: 0.8rem; }
-      .nav-link { font-size: 1rem; padding: 0.4rem 0.9rem; }
-      .module-tabs { gap: 0.5rem; }
-      .module-btn { padding: 0.4rem 1rem; font-size: 1rem; }
-      .content-card { padding: 1.5rem; }
+    /* 杂谈链接样式 */
+    .external-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1.5rem;
+      background: rgba(255,255,255,0.6);
+      border-radius: 40px;
+      color: #2a405c;
+      text-decoration: none;
+      border: 1px solid rgba(120,150,180,0.3);
+      transition: 0.2s;
+    }
+    .external-link:hover {
+      background: white;
     }
   </style>
 </head>
@@ -276,251 +209,121 @@
     <h1>时贞的小站</h1>
   </header>
 
-  <!-- 导航栏 -->
+  <!-- 导航栏：主页 / Novalat / 杂谈(链接到独立页面) -->
   <nav class="nav-bar">
     <button class="nav-link active" data-view="home">主页</button>
     <button class="nav-link" data-view="novalat">Novalat语言频道</button>
-    <button class="nav-link" data-view="chitchat">杂谈频道</button>
+    <a href="chitchat.html" class="nav-link">杂谈频道</a>
   </nav>
 
-  <!-- 主视图容器 -->
-  <main>
-    <!-- 主页视图 -->
-    <section id="home-view" class="view active-view">
-      <div class="content-card home-content">
-        <div id="home-content" class="markdown-body">
-          <!-- 将由js加载 home.md -->
-          <div class="loading-placeholder">⏳ 正在唤醒主页...</div>
-        </div>
+  <!-- 主页视图 -->
+  <section id="home-view" class="view active-view">
+    <div class="content-card">
+      <div id="home-content" class="markdown-body">
+        <div class="loading-placeholder">⏳ 正在唤醒主页...</div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Novalat语言频道视图 (包含三个子模块) -->
-    <section id="novalat-view" class="view">
-      <div class="content-card">
-        <div class="module-tabs">
-          <button class="module-btn active-module" data-module="syntax">📘 语法</button>
-          <button class="module-btn" data-module="lexicon">📙 词根表</button>
-          <button class="module-btn" data-module="article">📖 文章</button>
-        </div>
-        <!-- 子模块内容容器 -->
-        <div id="novalat-content" class="markdown-body">
-          <div class="loading-placeholder">📄 选择一个小节，内容将从 markdown 加载</div>
-        </div>
+  <!-- Novalat 视图 -->
+  <section id="novalat-view" class="view">
+    <div class="content-card">
+      <div class="module-tabs">
+        <button class="module-btn active-module" data-module="syntax">📘 语法</button>
+        <button class="module-btn" data-module="lexicon">📙 词根表</button>
+        <button class="module-btn" data-module="article">📖 文章</button>
       </div>
-    </section>
-
-    <!-- 杂谈频道视图 (无子模块) -->
-    <section id="chitchat-view" class="view">
-      <div class="content-card">
-        <div id="chitchat-content" class="markdown-body">
-          <div class="loading-placeholder">💬 杂谈内容待载入……</div>
-        </div>
+      <div id="novalat-content" class="markdown-body">
+        <div class="loading-placeholder">📄 选择一个小节，内容将从 markdown 加载</div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <div class="foot-note">✎ 所有内容均通过 markdown 文件管理，修改即更新</div>
+  <div class="foot-note">✎ 主页与Novalat内容通过 markdown 管理 · <a href="chitchat.html" style="color:#5f7d9c;">前往杂谈频道</a></div>
 </div>
 
-<!-- Markdown 解析库 marked (轻量，安全) -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
   (function() {
-    // ------ 配置 marked (可选) ------
-    marked.setOptions({
-      breaks: true,      // 支持换行
-      gfm: true,         // GitHub 风格 markdown
-      headerIds: false,  // 不自动生成id，避免干扰
-      mangle: false
-    });
+    marked.setOptions({ breaks: true, gfm: true, headerIds: false });
 
-    // ------ DOM 元素 ------
+    // 元素
     const homeSection = document.getElementById('home-view');
     const novalatSection = document.getElementById('novalat-view');
-    const chitchatSection = document.getElementById('chitchat-view');
-    const homeContentDiv = document.getElementById('home-content');
-    const novalatContentDiv = document.getElementById('novalat-content');
-    const chitchatContentDiv = document.getElementById('chitchat-content');
-
-    // 导航按钮
-    const navLinks = document.querySelectorAll('.nav-link');
-    // 模块按钮 (Novalat内部)
+    const homeContent = document.getElementById('home-content');
+    const novalatContent = document.getElementById('novalat-content');
+    const navLinks = document.querySelectorAll('.nav-link[data-view]');
     const moduleBtns = document.querySelectorAll('.module-btn');
 
-    // 状态跟踪
-    let currentNovalatModule = 'syntax';        // 默认语法
-    let novalatInitialized = false;             // 标记频道内是否已加载过内容 (用于首次显示)
+    let novalatInitialized = false;
     let homeInitialized = false;
-    let chitchatInitialized = false;
-
-    // 文件根路径 (markdown文件夹)
     const MD_PATH = 'markdown/';
 
-    // ------ 通用 fetch + markdown 渲染函数 ------
-    async function loadMarkdownInto(fileName, containerElement) {
-      if (!containerElement) return;
-      // 显示加载中 (可选)
-      containerElement.innerHTML = `<div class="loading-placeholder">📡 加载 ${fileName} ...</div>`;
-      try {
-        const response = await fetch(MD_PATH + fileName);
-        if (!response.ok) {
-          // 文件不存在时给出友好提示，且不破坏结构
-          containerElement.innerHTML = `<div class="loading-placeholder" style="color: #b04a4a;">⚠️ 未找到 ${fileName} ，请创建 markdown/${fileName} 文件。</div>`;
-          return;
-        }
-        const mdText = await response.text();
-        // 用marked解析
-        const htmlContent = marked.parse(mdText);
-        containerElement.innerHTML = htmlContent;
-      } catch (error) {
-        console.error('加载markdown失败:', error);
-        containerElement.innerHTML = `<div class="loading-placeholder" style="color: #b04a4a;">❌ 加载失败，请稍后重试或检查网络。</div>`;
-      }
+    function loadMarkdown(file, container) {
+      container.innerHTML = `<div class="loading-placeholder">📡 加载 ${file} ...</div>`;
+      fetch(MD_PATH + file)
+        .then(res => {
+          if (!res.ok) throw new Error('File not found');
+          return res.text();
+        })
+        .then(md => { container.innerHTML = marked.parse(md); })
+        .catch(err => {
+          container.innerHTML = `<div class="loading-placeholder" style="color:#b04a4a;">⚠️ 未找到 ${file} ，请创建 markdown/${file} 文件。</div>`;
+        });
     }
 
-    // ------ 切换视图 (显示对应section) ------
     function switchView(viewId) {
-      // 隐藏所有视图
       document.querySelectorAll('.view').forEach(v => v.classList.remove('active-view'));
-      // 移除所有导航active状态
       navLinks.forEach(link => link.classList.remove('active'));
 
-      // 显示选中的视图
       if (viewId === 'home') {
         homeSection.classList.add('active-view');
         document.querySelector('.nav-link[data-view="home"]').classList.add('active');
-        // 如果主页内容未初始化，加载home.md
         if (!homeInitialized) {
-          loadMarkdownInto('home.md', homeContentDiv).then(() => { homeInitialized = true; });
+          loadMarkdown('home.md', homeContent);
+          homeInitialized = true;
         }
-      } 
-      else if (viewId === 'novalat') {
+      } else if (viewId === 'novalat') {
         novalatSection.classList.add('active-view');
         document.querySelector('.nav-link[data-view="novalat"]').classList.add('active');
-
-        // 若尚未初始化Novalat内部显示 (即从未加载过任何模块)，则加载当前模块 (syntax)
         if (!novalatInitialized) {
-          // 确保模块按钮高亮正确 (默认syntax已是active-module)
-          loadMarkdownInto('syntax.md', novalatContentDiv).then(() => {
-            novalatInitialized = true;
-          });
-        } else {
-          // 已经初始化过，但为了确保内容是最新的？可根据需要重新加载当前模块(不强制)
-          // 如果想保持最新，可取消下一行注释；但为省流量，暂不重载。若用户手动切换模块再加载
-          // 但为了体验：再次显示时保留原内容，不自动刷新。
-        }
-      } 
-      else if (viewId === 'chitchat') {
-        chitchatSection.classList.add('active-view');
-        document.querySelector('.nav-link[data-view="chitchat"]').classList.add('active');
-        if (!chitchatInitialized) {
-          loadMarkdownInto('chitchat.md', chitchatContentDiv).then(() => { chitchatInitialized = true; });
+          loadMarkdown('syntax.md', novalatContent);
+          novalatInitialized = true;
         }
       }
     }
 
-    // ------ 处理Novalat内部模块切换 ------
-    function switchNovalatModule(moduleName) {
-      // 更新按钮 active 样式
+    function switchNovalatModule(module) {
       moduleBtns.forEach(btn => {
-        const mod = btn.dataset.module;
-        if (mod === moduleName) {
-          btn.classList.add('active-module');
-        } else {
-          btn.classList.remove('active-module');
-        }
+        btn.classList.toggle('active-module', btn.dataset.module === module);
       });
-
-      // 根据模块名加载对应 markdown 文件
-      let fileName = '';
-      if (moduleName === 'syntax') fileName = 'syntax.md';
-      else if (moduleName === 'lexicon') fileName = 'lexicon.md';
-      else if (moduleName === 'article') fileName = 'article.md';
-      else fileName = 'syntax.md';  // fallback
-
-      // 更新内容容器，并标记novalat已初始化
-      loadMarkdownInto(fileName, novalatContentDiv).then(() => {
-        novalatInitialized = true;
-        currentNovalatModule = moduleName;
-      });
+      let file = module === 'syntax' ? 'syntax.md' : (module === 'lexicon' ? 'lexicon.md' : 'article.md');
+      loadMarkdown(file, novalatContent);
+      novalatInitialized = true;
     }
 
-    // ------ 事件绑定 ------
-    // 导航栏点击
+    // 导航点击
     navLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        const view = link.dataset.view;
-        if (view) switchView(view);
+        switchView(link.dataset.view);
       });
     });
 
-    // Novalat 内部模块按钮点击
+    // 模块按钮点击
     moduleBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        const module = btn.dataset.module;
-        // 如果点击的是已经激活的模块，通常可忽略，但仍可重新加载（符合更新内容的直觉）
-        // 但为了允许手动刷新（例如修改了md文件后点击重新加载），这里总是加载
-        switchNovalatModule(module);
-        // 同时确保当前视图是 novalat (防止从其他视图直接点击模块)
-        // 如果当前不在novalat视图，自动切换到novalat视图
         if (!novalatSection.classList.contains('active-view')) {
           switchView('novalat');
-          // 模块高亮会被switchNovalatModule更新，但switchView('novalat')里不会自动重新加载模块
-          // 因此需要手动调用加载，但为了避免冲突：在switchView后再次调用switchNovalatModule(module)
-          // 但是switchNovalatModule会再次加载，可能会重复。所以我们可以优化：
-          // 如果当前视图不是novalat，先切视图，然后调用模块加载。
-          // 由于switchView('novalat')不会改变novalatContentDiv内容(因为novalatInitialized可能为true)，但我们需要显示新模块
-          // 所以简单处理：先切视图，再执行模块加载 (switchNovalatModule内部会加载文件并更新)
-          // 但注意switchView里可能会检查novalatInitialized，但不重新加载，所以之后调用switchNovalatModule可以覆盖。
         }
-        // 如果已经在novalat视图，直接切换模块即可（已经在上边调用switchNovalatModule）
+        switchNovalatModule(btn.dataset.module);
       });
     });
 
-    // 修正同时点击模块和导航的联动：如果点击模块时所在视图不是novalat，手动切换视图 + 加载模块
-    // 增强：监听模块按钮，统一处理
-    function handleModuleClick(moduleBtn) {
-      const module = moduleBtn.dataset.module;
-      // 如果当前激活视图不是novalat，先切换视图
-      if (!novalatSection.classList.contains('active-view')) {
-        switchView('novalat');
-      }
-      // 切换模块 (并加载)
-      switchNovalatModule(module);
-    }
-
-    // 重写模块按钮监听 (避免重复)
-    moduleBtns.forEach(btn => {
-      btn.removeEventListener('click', handleModuleClick);
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        handleModuleClick(btn);
-      });
-    });
-
-    // 初始化：默认加载主页
-    window.addEventListener('load', () => {
-      // 确保active-view是主页
-      switchView('home');
-      // 额外：若home.md尚未加载，已经在switchView中处理
-    });
-
-    // 额外：如果用户直接刷新页面，保持当前视图？默认首页。已经处理。
-    // 提供便利：如果以后想手动重刷，可点击模块。没问题。
+    // 初始化主页
+    switchView('home');
   })();
 </script>
-
-<!-- 注：需要手动在 markdown/ 文件夹下创建以下五个文件 (占位用，可随意修改):
-  - home.md
-  - syntax.md
-  - lexicon.md
-  - article.md
-  - chitchat.md
-  这些文件的内容会直接渲染到对应区块。 
--->
-
 </body>
 </html>
